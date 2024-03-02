@@ -1,0 +1,58 @@
+server:
+  port: 8092
+  shutdown: graceful # 优雅停机
+spring:
+  application:
+    name: sharding-service
+  shardingsphere:
+    datasource:
+      names: mysql_master,mysql_slave01,mysql_slave02
+      mysql_master:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.01:3306/test?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&useIPv6=false
+        username: root
+        password: root
+      mysql_slave01:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.01:3307/test?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&useIPv6=false
+        username: root
+        password: root
+      mysql_slave02:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.01:3308/test?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true&useIPv6=false
+        username: root
+        password: root
+#    rules:
+#      readwrite-splitting:
+#        load-balancers:
+#          test:
+#            type: load
+#            props: ""
+#        data-sources:
+#          test:
+#            staticStrategy:
+#              write-data-source-name: mysql_master
+#              read-data-source-names:
+#                - mysql_slave01
+#                - mysql_slave02
+#            dynamicStrategy:
+#            loadBalancerName:
+#          test1:
+#            staticStrategy:
+#              write-data-source-name: mysql_master
+#              read-data-source-names:
+#                - mysql_slave01
+#                - mysql_slave02
+#            dynamicStrategy:
+#              auto-aware-data-source-name: ""
+#              write-data-source-query-enabled: true
+#            loadBalancerName:
+
+#    props:
+#      sql-show: true
+#    mode:
+#      repository:
+#        type: Standalone # 本地模式：Standalone; 集群模式：Cluster
